@@ -10,11 +10,11 @@ const Hero = () => {
         <Image
           src="/path5.svg"
           alt="camp"
-          width={50}
-          height={50}
-          className="absolute left-[-5px] top-[-30px] w-10 lg:w-[50px]"
+          width={30}
+          height={30}
+          className="absolute left-[0px] top-[-24px] w-10 lg:w-[30px]"
         />
-        <h1 className="bold-52 lg:bold-88">
+        <h1 className="bold-52 lg:bold-80">
           Proper Greening & Smart Solutions
         </h1>
         <p className="regular-16 mt-6 text-gray-30 xl:max-w-[520px]">
