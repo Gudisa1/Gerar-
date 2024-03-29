@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Install dependencies and build the React application
-               echo "Installing the dependencies"
+               echo "Installing the dependencies .........."
             }
         }
         
