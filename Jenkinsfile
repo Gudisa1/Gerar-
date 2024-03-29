@@ -1,32 +1,45 @@
 pipeline {
-    agent any
-    
-    stages {
-        stage('Build') {
-            steps {
-                sh 'echo "Building the project..."'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'echo "Running tests..."'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'echo "Deploying the application..."'
-            }
-        }
-    }
-    
-    post {
-        success {
-            echo 'Pipeline succeeded! Send notification...'
-            // Add code here to send a notification on success
-        }
-        failure {
-            echo 'Pipeline failed! Send notification...'
-            // Add code here to send a notification on failure
-        }
-    }
+         agent any
+         stages {
+                 stage('One') {
+                 steps {
+                     echo 'Hi, this is Gudisa from GraceTech'
+                 }
+                 }
+                 stage('Two') {
+                 steps {
+                    input('Do you want to proceed?')
+                 }
+                 }
+                 stage('Three') {
+                 when {
+                       not {
+                            branch "master"
+                       }
+                 }
+                 steps {
+                       echo "Hello"
+                 }
+                 }
+                 stage('Four') {
+                 parallel { 
+                            stage('Unit Test') {
+                           steps {
+                                echo "Running the unit test..."
+                           }
+                           }
+                            stage('Integration test') {
+                              agent {
+                                    docker {
+                                            reuseNode true
+                                            image 'ubuntu'
+                                           }
+                                    }
+                              steps {
+                                echo "Running the integration test..."
+                              }
+                           }
+                           }
+                           }
+              }
 }
