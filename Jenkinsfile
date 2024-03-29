@@ -1,33 +1,28 @@
 pipeline {
-         agent any
-         stages {
-                 stage('One') {
-                 steps {
-                     echo 'Hi, this is Gudisa from GraceTech'
-                 }
-                 }
-                 stage('Two') {
-                 steps {
-                    input('Do you want to proceed?')
-                 }
-                 }
-                 stage('Three') {
-                 when {
-                       not {
-                            branch "master"
-                       }
-                 }
-                 steps {
-                       echo "Hello"
-                 }
-                 }
-                 stage('Four') {
-                 parallel { 
-                            stage('Unit Test') {
-                           steps {
-                                echo "Running the unit test..."
-                           }
-                         
-                           }
-              }
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                // Install dependencies and build the React application
+                sh 'npm install && npm run build'
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                // Deploy the built files to the server
+                echo "Deploying the app"
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'React application deployed successfully!'
+        }
+        failure {
+            echo 'Failed to deploy React application!'
+        }
+    }
 }
